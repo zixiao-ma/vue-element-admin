@@ -9,3 +9,9 @@ export const login = (model) => {
   model.password = md5(model.password);
   return request.post('sys/login', model);
 };
+/*
+ * @getUserInfo 获取用户信息
+ *  */
+export const getUserInfo = () => {
+  return request.get('sys/profile');
+};

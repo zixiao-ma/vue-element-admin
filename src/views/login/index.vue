@@ -10,30 +10,36 @@
       <div class="title-container">
         <h3>用户登录</h3>
         <div class="svg-title">
-          <span>icon</span>
+          <el-tooltip
+            class="box-item"
+            content="切换语言"
+            effect="light"
+            placement="bottom"
+          >
+            <svg-icon icon="language"></svg-icon>
+          </el-tooltip>
+
         </div>
       </div>
       <el-form-item prop="username">
  <span class="svg-container">
-          <el-icon>
-            <avatar/>
-          </el-icon>
+        <svg-icon icon="user"></svg-icon>
         </span>
         <el-input v-model="ruleForm.username"/>
       </el-form-item>
       <el-form-item prop="password">
          <span class="svg-container">
           <el-icon>
-            <avatar/>
+          <svg-icon icon="password"></svg-icon>
           </el-icon>
         </span>
         <el-input v-model="ruleForm.password" :type="toggleInputType?'text':'password'">
           <template #suffix>
             <el-icon v-if="!toggleInputType" class="el-input__icon" @click="toggleInputType=!toggleInputType">
-              <Hide/>
+              <svg-icon icon="eye"></svg-icon>
             </el-icon>
             <el-icon v-if="toggleInputType" class="el-input__icon" @click="toggleInputType=!toggleInputType">
-              <View/>
+              <svg-icon icon="eye-open"></svg-icon>
             </el-icon>
 
           </template>
@@ -49,19 +55,19 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
-import { Avatar, Hide, View } from '@element-plus/icons-vue'
-import { login } from '../../../utils/user'
+import { login } from '../../utils/user'
 import { validatorPwd } from '@/views/login/rules'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import SvgIcon from '@/components/SvgIcon'
 
 const toggleInputType = ref(false)
 const loginLoading = ref(false)
 const store = useStore()
 const router = useRouter()
 const ruleForm = reactive({
-  username: '',
-  password: ''
+  username: 'admin',
+  password: '123456'
 })
 const rules = reactive({
   username: [{
@@ -84,7 +90,7 @@ const submitForm = () => {
       try {
         loginLoading.value = true
         const res = await login(ruleForm);
-        await store.commit('setUserInfo', res)
+        await store.commit('setToken', res)
         await router.push({ name: 'HomeLayout' })
       } catch (error) {
 
@@ -102,6 +108,7 @@ $bg: #2d3a4b;
 $dark_gray: #889aa4;
 $light_gray: #eee;
 $cursor: #fff;
+
 .login-container {
   height: 100%;
   background-color: $bg;
@@ -157,17 +164,25 @@ $cursor: #fff;
     h3 {
       text-align: center;
       color: $light_gray;
-      margin-bottom: 40px;
+      margin-bottom: 45px;
       font-size: 26px;
     }
 
     .svg-title {
       position: absolute;
       right: 0;
+      padding: 5px;
+      border-radius: 3px;
+      background-color: $cursor;
       top: 50%;
+      cursor: pointer;
       transform: translateY(-50%);
       font-size: 20px;
       color: $light_gray;
+
+      .svg-icon {
+        color: $light_gray;
+      }
     }
 
   }

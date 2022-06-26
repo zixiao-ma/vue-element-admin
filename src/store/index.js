@@ -1,26 +1,41 @@
 import { createStore } from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
+import { getUserInfo } from '@/utils/user';
 
-const saveStoreData = (store) => {
-  const key = 'VUE_STORE_KEY';
-  const storage = window.sessionStorage;
-  const data = storage.getItem(key);
-  data && store.replaceState(JSON.parse(data));
-
-  store.subscribe((mutation, state) => {
-    storage.setItem(key, JSON.stringify(state));
-  });
-};
 export default createStore({
   state: {
-    user: {}
+    user: {},
+    userInfo: {}
   },
-  getters: {},
-  mutations: {
-    setUserInfo (state, payload) {
-      state.user = payload;
+  getters: {
+    getToken (state) {
+      return state.user.token;
     }
   },
-  actions: {},
+  mutations: {
+    setToken (state, payload) {
+      state.user = payload;
+    },
+    setUserInfo (state, userInfo) {
+      state.userInfo = userInfo;
+    },
+    loginOut (state) {
+      state.user = {};
+    }
+  },
+  actions: {
+    async getUserInfo ({ commit }) {
+      const res = await getUserInfo();
+      commit('setUserInfo', res);
+      console.log(res);
+      return res;
+    }
+  },
   modules: {},
-  plugins: [saveStoreData]
+  plugins: [
+    createPersistedState({
+      key: 'vuex',
+      storage: window.sessionStorage
+    })
+  ]
 });

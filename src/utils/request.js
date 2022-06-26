@@ -3,6 +3,7 @@ import Nprogress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { ElMessage } from 'element-plus';
 import md5 from 'md5';
+import store from '@/store/index';
 
 Nprogress.configure({ showSpinner: false });
 const instance = axios.create({
@@ -17,7 +18,7 @@ instance.interceptors.request.use(
     // 在发送请求之前做些什么
     // TODO 添加token
     Nprogress.start();
-    // config.headers!.Authorization = store.getters.getToken
+    config.headers.Authorization = `Bearer ${store.getters.getToken}`;
     const { icode, time } = getTestICode();
     config.headers.icode = icode;
     config.headers.codeType = time;
