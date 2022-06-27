@@ -2,7 +2,6 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import HomeLayout from '@/layout/index';
 import store from '@/store/index';
 
-console.log(store);
 const publicRoutes = [
   {
     path: '/login',

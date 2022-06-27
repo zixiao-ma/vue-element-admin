@@ -55,7 +55,7 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
-import { login } from '../../utils/user'
+import { getUserInfo, login } from '../../utils/user'
 import { validatorPwd } from '@/views/login/rules'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
@@ -92,6 +92,8 @@ const submitForm = () => {
         const res = await login(ruleForm);
         await store.commit('setToken', res)
         await router.push({ name: 'HomeLayout' })
+        const userInfo = await getUserInfo()
+        await store.commit('setUserInfo', userInfo)
       } catch (error) {
 
       }

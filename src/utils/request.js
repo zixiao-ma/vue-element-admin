@@ -7,9 +7,7 @@ import store from '@/store/index';
 
 Nprogress.configure({ showSpinner: false });
 const instance = axios.create({
-  // baseURL: Process.env['VUE_APP_BASE_API '],
-  // timeout: Process.env['VUE_APP_TIMEOUT ']
-  baseURL: 'https://imooc-admin.lgdsunday.club/prod-api/',
+  baseURL: process.env.VUE_APP_BASE_API,
   timeout: 6000
 });
 // 添加请求拦截器
@@ -64,7 +62,7 @@ instance.interceptors.response.use(
     const { status } = error.response;
     switch (status) {
       case 401:
-        ElMessage.error('没有提供认证信息').then(() => {
+        ElMessage.error('Token超时，没有提供认证信息').then(() => {
           return Promise.reject(error);
         });
         break;

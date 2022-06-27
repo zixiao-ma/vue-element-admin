@@ -56,7 +56,7 @@ const props = defineProps({
     defaults: () => false
   }
 })
-console.log(props.collapse)
+
 const handleOpen = (key, keyPath) => {
   console.log(key, keyPath)
 }
