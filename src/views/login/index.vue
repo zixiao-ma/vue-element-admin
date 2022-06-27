@@ -88,12 +88,12 @@ const submitForm = () => {
     if (valid) {
       try {
         loginLoading.value = true
+        // 获取并存储token
         const res = await login(ruleForm);
         await store.commit('setToken', res)
-        await router.push({ name: 'HomeLayout' })
         const userInfo = await getUserInfo()
-        console.log(userInfo)
         await store.commit('setUserInfo', userInfo)
+        await router.push({ name: 'HomeLayout' })
       } catch (error) {
       }
       loginLoading.value = false

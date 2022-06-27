@@ -11,7 +11,7 @@ export const login = (data) => {
     url: '/sys/login',
     method: 'POST',
     data
-  });
+  }, true);
 };
 /*
  * @getUserInfo 获取用户信息
@@ -31,5 +31,5 @@ export const getUserFeature = () => {
   return request({
     url: '/user/feature',
     method: 'GET'
-  })
+  }, false)
 }

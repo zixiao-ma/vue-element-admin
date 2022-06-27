@@ -5,6 +5,7 @@ import md5 from 'md5';
 import store from '@/store/index';
 import router from '@/router';
 
+let showMessage = false
 const instance = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 6000
@@ -48,8 +49,10 @@ instance.interceptors.response.use(
         ElMessage.error(message);
         return Promise.reject(message);
       }
-      ElMessage.success(message);
+      showMessage && ElMessage.success(message);
       return data;
+    } else {
+      return Promise.reject(message);
     }
   },
   function (error) {
@@ -68,15 +71,15 @@ instance.interceptors.response.use(
     const { status } = error.response;
     switch (status) {
       case 401:
-        ElMessage.error('Token超时,请重新登录！').then(() => {
-          return Promise.reject(error);
-        });
-        break;
-      case 404:
-        ElMessage.error('访问接口地址不正确！')
+        ElMessage.error('Token超时,请重新登录！')
         store.commit('loginOut')
         router.push({ name: 'login' })
         return Promise.reject(error);
+      case 404:
+        ElMessage.error('访问接口地址不正确！').then(() => {
+          return Promise.reject(error);
+        })
+        break;
       case 500:
         ElMessage.error('服务器发生错误！').then(() => {
           return Promise.reject(error);
@@ -106,7 +109,8 @@ function getTestICode () {
   };
 }
 
-function request (optios) {
+function request (optios, showMsg = false) {
+  showMessage = showMsg
   if (optios.method.toLowerCase() === 'get') {
     optios.params = optios.data || {}
   }

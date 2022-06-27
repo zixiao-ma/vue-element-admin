@@ -9,7 +9,7 @@
         <div class="avatar">
           <el-dropdown>
     <span class="el-dropdown-link">
-      <img alt="" src="https://m.imooc.com/static/wap/static/common/img/logo-small@2x.png">
+     <logo-image></logo-image>
     </span>
             <template #dropdown>
               <el-dropdown-menu>
@@ -33,12 +33,12 @@ import { defineEmits, ref } from 'vue'
 import { useStore } from 'vuex'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useRouter } from 'vue-router'
+import LogoImage from '@/components/logoImage';
 
 const router = useRouter()
 const store = useStore()
 const emit = defineEmits(['collapse'])
 const iscollapse = ref(false)
-
 const collapse = () => {
   iscollapse.value = !iscollapse.value
   emit('collapse', iscollapse.value)
