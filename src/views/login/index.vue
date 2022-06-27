@@ -55,7 +55,7 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
-import { getUserInfo, login } from '../../utils/user'
+import { getUserInfo, login } from '../../api/user'
 import { validatorPwd } from '@/views/login/rules'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
@@ -79,7 +79,6 @@ const rules = reactive({
     required: true,
     trigger: 'blur',
     validator: validatorPwd
-
   }]
 })
 const ruleFormRef = ref(null)
@@ -93,9 +92,9 @@ const submitForm = () => {
         await store.commit('setToken', res)
         await router.push({ name: 'HomeLayout' })
         const userInfo = await getUserInfo()
+        console.log(userInfo)
         await store.commit('setUserInfo', userInfo)
       } catch (error) {
-
       }
       loginLoading.value = false
     } else {

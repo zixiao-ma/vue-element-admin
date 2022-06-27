@@ -26,12 +26,16 @@ import Sidebar from './components/Sidebar'
 import AppMain from './components/AppMain'
 import variables from '@/styles/variables.module.scss'
 import { ref } from 'vue'
+import { getUserFeature } from '@/api/user'
 
 const menuCollapse = ref(false)
 const collapse = (bool) => {
   menuCollapse.value = bool
 }
-
+const res = getUserFeature()
+res.then(res => {
+  console.log(res)
+})
 </script>
 <style lang="scss" scoped>
 @import '~@/styles/mixin.scss';

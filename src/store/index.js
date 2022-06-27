@@ -1,26 +1,27 @@
 import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
-import { getUserInfo } from '@/utils/user';
+import { getUserInfo } from '@/api/user';
 
 export default createStore({
   state: {
-    user: {},
+    token: {},
     userInfo: {}
   },
   getters: {
     getToken (state) {
-      return state.user.token;
+      return state.token.token;
     }
   },
   mutations: {
     setToken (state, payload) {
-      state.user = payload;
+      state.token = payload;
     },
     setUserInfo (state, userInfo) {
       state.userInfo = userInfo;
     },
     loginOut (state) {
-      state.user = {};
+      state.token = {};
+      state.userInfo = {}
     }
   },
   actions: {
