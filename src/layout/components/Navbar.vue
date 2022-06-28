@@ -33,7 +33,9 @@ import { defineEmits, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useRouter } from 'vue-router'
 import LogoImage from '@/components/logoImage';
-import { removeAllItem } from '@/utils/storage';
+import { useStore } from 'vuex';
+
+const store = useStore()
 
 const router = useRouter()
 const emit = defineEmits(['collapse'])
@@ -57,8 +59,8 @@ const loginOut = () => {
         type: 'success',
         message: '退出成功！'
       })
-      removeAllItem()
-      router.push({ name: 'login' })
+      store.commit('user/loginOut')
+      router.push('/login')
     })
     .catch(() => {
       ElMessage({

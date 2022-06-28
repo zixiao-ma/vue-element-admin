@@ -18,6 +18,8 @@ export default {
       setItem(USERINFO, userInfo)
     },
     loginOut (state) {
+      state.token = null;
+      state.userInfo = {}
       removeAllItem()
     }
   },

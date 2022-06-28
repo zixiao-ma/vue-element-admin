@@ -1,6 +1,7 @@
 <template>
   <div class="app-main">
-    <el-card>main</el-card>
+    <el-card>
+    </el-card>
   </div>
 </template>
 

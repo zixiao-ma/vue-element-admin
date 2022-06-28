@@ -88,7 +88,7 @@ const submitForm = () => {
     if (valid) {
       try {
         loginLoading.value = true
-        // 获取并存储token
+        // 获取并storagetoken
         const newRuleForm = util.DeepCopy(ruleForm)
         await store.dispatch('user/login', newRuleForm)
         await store.dispatch('user/getUserInfo')
