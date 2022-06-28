@@ -15,7 +15,7 @@
         <el-icon>
           <logo-image></logo-image>
         </el-icon>
-        <span style="padding-left: 15px">{{ $store.state.userInfo.username }}</span>
+        <span style="padding-left: 15px">admin</span>
       </el-menu-item>
       <el-menu-item index="2">
         <el-icon>

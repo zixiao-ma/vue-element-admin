@@ -55,7 +55,7 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
-import { getUserInfo, login } from '../../api/user'
+import util from '@/utils/util';
 import { validatorPwd } from '@/views/login/rules'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
@@ -89,10 +89,9 @@ const submitForm = () => {
       try {
         loginLoading.value = true
         // 获取并存储token
-        const res = await login(ruleForm);
-        await store.commit('setToken', res)
-        const userInfo = await getUserInfo()
-        await store.commit('setUserInfo', userInfo)
+        const newRuleForm = util.DeepCopy(ruleForm)
+        await store.dispatch('user/login', newRuleForm)
+        await store.dispatch('user/getUserInfo')
         await router.push({ name: 'HomeLayout' })
       } catch (error) {
       }

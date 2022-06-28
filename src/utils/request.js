@@ -2,8 +2,9 @@ import axios from 'axios';
 import loading from '@/utils/loading';
 import { ElMessage } from 'element-plus';
 import md5 from 'md5';
-import store from '@/store/index';
-import router from '@/router';
+import { getItem, removeAllItem } from '@/utils/storage';
+import router from '@/router/index'
+import { TOKEN } from '@/constant';
 
 let showMessage = false
 const instance = axios.create({
@@ -17,7 +18,7 @@ instance.interceptors.request.use(
     // TODO 添加token
     // loading.elLoading.start()
     loading.nprogress.start()
-    config.headers.Authorization = `Bearer ${store.getters.getToken}`;
+    config.headers.Authorization = `Bearer ${getItem(TOKEN)}`;
     const {
       icode,
       time
@@ -72,7 +73,7 @@ instance.interceptors.response.use(
     switch (status) {
       case 401:
         ElMessage.error('Token超时,请重新登录！')
-        store.commit('loginOut')
+        removeAllItem()
         router.push({ name: 'login' })
         return Promise.reject(error);
       case 404:

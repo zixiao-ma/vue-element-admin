@@ -5,7 +5,7 @@ import request from '../utils/request';
  *  */
 import md5 from 'md5';
 
-export const login = (data) => {
+const login = (data) => {
   data.password = md5(data.password);
   return request({
     url: '/sys/login',
@@ -16,7 +16,7 @@ export const login = (data) => {
 /*
  * @getUserInfo 获取用户信息
  *  */
-export const getUserInfo = () => {
+const getUserInfo = () => {
   return request({
     url: '/sys/profile',
     method: 'get'
@@ -27,9 +27,14 @@ export const getUserInfo = () => {
 * 请求路径：/user/feature
 * 请求方法：get
 *  */
-export const getUserFeature = () => {
+const getUserFeature = () => {
   return request({
     url: '/user/feature',
     method: 'GET'
   }, false)
+}
+export default {
+  login,
+  getUserInfo,
+  getUserFeature
 }
