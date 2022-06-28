@@ -1,53 +1,48 @@
 <template>
   <div class="app-wrapper">
-    <!-- 左侧 menu -->
-    <sidebar
-      id="guide-sidebar"
-      :collapse="menuCollapse"
-      :style="{ backgroundColor: variables.menuBg,width:menuCollapse?'64px':'210px'}"
-
-      class="sidebar-container"
-    />
-    <div :style="{marginLeft:menuCollapse?'64px':'210px'}" class="main-container">
-      <div :style="{width:menuCollapse?'96%':'86%'}" class="fixed-header">
-        <!-- 顶部的 navbar -->
-        <navbar @collapse="collapse"/>
+    <sidebar class="sidebar"></sidebar>
+    <div class="main-container">
+      <div class="fixedNav">
+        <navbar class="navbar"></navbar>
       </div>
-      <!-- 内容区 111-->
-      <app-main/>
+      <app-main></app-main>
     </div>
   </div>
 </template>
 
 <script setup>
-
 import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar'
 import AppMain from './components/AppMain'
-import variables from '@/styles/variables.module.scss'
-import { ref } from 'vue'
-
-const menuCollapse = ref(false)
-const collapse = (bool) => {
-  menuCollapse.value = bool
-}
-
-</script>
+import Sidebar from './components/Sidebar/index'</script>
 <style lang="scss" scoped>
-@import '~@/styles/mixin.scss';
-@import '~@/styles/variables.module.scss';
+@import '../styles/variables.module.scss';
 
 .app-wrapper {
-  @include clearfix;
-  position: relative;
   height: 100%;
-  width: 100%;
+  position: relative;
+
+  .sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    height: 100%;
+    width: 210px;
+    background-color: $menuBg;
+  }
+
+  .main-container {
+    position: absolute;
+    right: 0;
+    width: calc(100% - 210px);
+    background-color: #fff;
+    height: 100%;
+
+    .navbar {
+      height: 50px;
+      border-bottom: 1px solid #ddd;
+    }
+  }
 }
 
-.fixed-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 9;
-}
 </style>
