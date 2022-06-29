@@ -33,7 +33,7 @@ export default {
     async login ({ commit }, payload) {
       const res = await user.login(payload);
       commit('setToken', res.token);
-      console.log(res);
+      return res
     }
   }
 }

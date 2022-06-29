@@ -1,13 +1,10 @@
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+  <div>excel导入</div>
 </template>
 
 <script setup>
 
 </script>
-
 <style lang="scss" scoped>
 
 </style>

@@ -3,9 +3,11 @@
     <sidebar class="sidebar"></sidebar>
     <div class="main-container">
       <div class="fixedNav">
+
         <navbar class="navbar"></navbar>
+        <tags-view class="tagsView"></tags-view>
       </div>
-      <app-main></app-main>
+      <app-main class="appmain"></app-main>
     </div>
   </div>
 </template>
@@ -13,7 +15,8 @@
 <script setup>
 import Navbar from './components/Navbar'
 import AppMain from './components/AppMain'
-import Sidebar from './components/Sidebar/index'</script>
+import Sidebar from './components/Sidebar/index'
+import TagsView from '@/components/TagsView'; </script>
 <style lang="scss" scoped>
 @import '../styles/variables.module.scss';
 
@@ -38,9 +41,33 @@ import Sidebar from './components/Sidebar/index'</script>
     background-color: #fff;
     height: 100%;
 
+    .fixedNav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: calc(100% - 210px);
+      background-color: #fff;
+    }
+
     .navbar {
       height: 50px;
       border-bottom: 1px solid #ddd;
+      padding: 0 10px;
+    }
+
+    .tagsView {
+      height: 30px;
+      padding: 0 10px;
+      border-bottom: 1px solid #ddd;
+      line-height: 30px;
+    }
+
+    .appmain {
+      box-sizing: border-box;
+      padding: 20px;
+      height: calc(100% - 82px);
+      overflow-y: auto;
+      margin-top: 82px;
     }
   }
 }
