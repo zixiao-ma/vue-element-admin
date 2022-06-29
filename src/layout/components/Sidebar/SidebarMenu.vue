@@ -1,68 +1,104 @@
 <template>
   <div>
-
-    <el-menu
-      :collapse="props.collapse"
-      active-text-color="#fff"
-      background-color="none"
-      class="el-menu-vertical-demo"
-      default-active="2"
-      text-color="#fff"
-      @close="handleClose"
-      @open="handleOpen"
-    >
-      <el-menu-item class="menu_logo" index="1">
-        <el-icon>
-          <logo-image></logo-image>
-        </el-icon>
-        <span style="padding-left: 15px">admin</span>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <el-icon>
-          <icon-menu/>
-        </el-icon>
-        <span>个人中心</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <el-icon>
-          <icon-menu/>
-        </el-icon>
-        <span>数据可视化</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <el-icon>
-          <setting/>
-        </el-icon>
-        <span>用户</span>
-      </el-menu-item>
-      <el-menu-item index="5">
-        <el-icon>
-          <setting/>
-        </el-icon>
-        <span>文章</span>
-      </el-menu-item>
-    </el-menu>
+    <deep-menu :collapse="props.closable" :data="menus" name="name"></deep-menu>
   </div>
 
 </template>
 
 <script setup>
-import { Menu as IconMenu, Setting } from '@element-plus/icons-vue'
 import { defineProps } from 'vue'
-import LogoImage from '@/components/logoImage';
+import DeepMenu from '@/layout/components/Sidebar/deepMenu';
 
+const menus = [
+  {
+    path: '/profile',
+    name: 'profile',
+    meta: {
+      title: 'profile',
+      icon: 'user'
+    }
+  },
+  {
+    path: '/user',
+    redirect: '/user/manage',
+    name: 'user',
+    meta: {
+      title: 'user',
+      icon: 'personnel'
+    },
+    props: {
+      default: false
+    },
+    children: [
+      {
+        path: '/user/manage',
+        name: 'userManage',
+        meta: {
+          title: 'userManage',
+          icon: 'personnel-manage'
+        },
+        children: []
+      },
+      {
+        path: '/user/role',
+        name: 'userRole',
+        meta: {
+          title: 'roleList',
+          icon: 'role'
+        },
+        children: []
+      },
+      {
+        path: '/user/permission',
+        name: 'userPermission',
+        meta: {
+          title: 'permissionList',
+          icon: 'permission'
+        },
+        children: []
+      }
+    ]
+  },
+  {
+    path: '/article',
+    name: 'article',
+    redirect: '/article/ranking',
+    meta: {
+      title: 'article',
+      icon: 'article'
+    },
+    props: {
+      default: false
+    },
+    children: [
+      {
+        path: '/article/ranking',
+        name: 'articleRanking',
+        meta: {
+          title: 'articleRanking',
+          icon: 'article-ranking'
+        },
+        children: []
+      },
+      {
+        path: '/article/create',
+        name: 'articleCreate',
+        meta: {
+          title: 'articleCreate',
+          icon: 'article-create'
+        },
+        children: []
+      }
+    ]
+  }
+];
 const props = defineProps({
   collapse: {
     type: Boolean,
     defaults: () => false
   }
 })
-const handleOpen = (key, keyPath) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key, keyPath) => {
-  console.log(key, keyPath)
-}
+
 </script>
 <style lang="scss" scoped>
 .menu_logo {
