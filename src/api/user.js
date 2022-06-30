@@ -33,8 +33,27 @@ const getUserFeature = () => {
     method: 'GET'
   }, false)
 }
+const getUserManage = (model) => {
+  console.log(model, 'model')
+  return request({
+    url: '/user-manage/list',
+    method: 'GET',
+    data: model
+  }, false)
+}
+/*
+* @data id
+* */
+const getUserDetail = (data) => {
+  return request({
+    url: '/user-manage/detail/' + data,
+    method: 'get'
+  })
+}
 export default {
   login,
   getUserInfo,
-  getUserFeature
+  getUserFeature,
+  getUserManage,
+  getUserDetail
 }

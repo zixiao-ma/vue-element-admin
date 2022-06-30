@@ -40,15 +40,13 @@ instance.interceptors.response.use(
     const {
       data: {
         data,
+        code,
         message
-      },
-      status
-    } = response
-    if (status === 200 || status === 201) {
-      if (!data) {
-        ElMessage.error(message || '发生未知错误')
-        return Promise.reject(message)
       }
+
+    } = response
+    console.log(response)
+    if (code === 200) {
       showMessage && ElMessage.success(message)
       return data
     } else {

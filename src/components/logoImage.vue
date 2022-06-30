@@ -1,24 +1,20 @@
 <template>
-  <img v-if="userInfo" :src="img.src" :style="{width:props.width+'px'}" :title="img.title">
+  <img v-if="userInfo" :src="userInfo.avatar" :style="{width:props.width+'px'}" :title="userInfo.title">
 </template>
 
 <script setup>
-import { defineProps, reactive } from 'vue';
-import { getItem } from '@/utils/storage';
-import { USERINFO } from '@/constant';
+import { defineProps } from 'vue';
+import { useStore } from 'vuex';
 
+const sotre = useStore()
+const userInfo = sotre.getters.userInfo
 const props = defineProps({
   width: {
     type: String,
     default: '40'
   }
 })
-const userInfo = reactive(getItem(USERINFO))
-const emptySrc = 'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
-const img = reactive({
-  src: userInfo.avatar || emptySrc,
-  title: userInfo.title
-})
+
 </script>
 <style lang="scss" scoped>
 img {

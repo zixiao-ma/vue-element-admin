@@ -1,7 +1,7 @@
 <template>
   <div class="app-main">
-    <el-card>
-    </el-card>
+
+    <router-view></router-view>
   </div>
 </template>
 

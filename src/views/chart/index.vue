@@ -1,5 +1,7 @@
 <template>
-  <div>个人中心</div>
+  <div>
+    数据可视化
+  </div>
 </template>
 
 <script setup>

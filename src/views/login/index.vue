@@ -91,7 +91,6 @@ const submitForm = () => {
         // 获取并storagetoken
         const newRuleForm = util.DeepCopy(ruleForm)
         await store.dispatch('user/login', newRuleForm)
-        await store.dispatch('user/getUserInfo')
         await router.push({ name: 'HomeLayout' })
       } catch (error) {
       }

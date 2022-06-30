@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state: () => ({
     token: getItem(TOKEN) || null,
-    userInfo: getItem(USERINFO) || {}
+    userInfo: getItem(USERINFO) || ''
   }),
   mutations: {
     setToken (state, payload) {
@@ -33,7 +33,7 @@ export default {
     async login ({ commit }, payload) {
       const res = await user.login(payload);
       commit('setToken', res.token);
-      console.log(res);
+      console.log(res, 'token');
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div>个人中心</div>
+  <div>权限列表</div>
 </template>
 
 <script setup>
