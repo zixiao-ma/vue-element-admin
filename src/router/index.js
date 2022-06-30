@@ -97,10 +97,7 @@ const privateRoute = [
     path: '/article',
     name: 'article',
     component: HomeLayout,
-    meta: {
-      title: '文章',
-      icon: 'article'
-    },
+    meta: {},
     redirect: '/article/ranking',
     children: [
       {

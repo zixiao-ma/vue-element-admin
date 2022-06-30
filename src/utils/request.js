@@ -3,7 +3,6 @@ import loading from '@/utils/loading'
 import { ElMessage } from 'element-plus'
 import md5 from 'md5'
 import store from '@/store/index';
-import router from '@/router/index'
 
 let showMessage = false
 const instance = axios.create({
@@ -73,7 +72,7 @@ instance.interceptors.response.use(
       case 401:
         ElMessage.error('Token超时,请重新登录！')
         store.commit('user/loginOut')
-        router.push({ name: 'login' })
+
         return Promise.reject(error)
       case 404:
         ElMessage.error('访问接口地址不正确！').then(() => {

@@ -1,6 +1,7 @@
 import user from '@/api/user';
 import { getItem, removeAllItem, setItem } from '@/utils/storage';
 import { TOKEN, USERINFO } from '@/constant';
+import router from '@/router'
 
 export default {
   namespaced: true,
@@ -21,6 +22,7 @@ export default {
       state.token = null;
       state.userInfo = {}
       removeAllItem()
+      router.push('/login')
     }
   },
   actions: {

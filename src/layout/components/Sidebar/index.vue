@@ -8,7 +8,12 @@
 
 import { reactive } from 'vue';
 import Menutree from '@/layout/components/Sidebar/Menutree';
+import { filterRouter, getMenu } from '@/utils/Menus'
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
+
+console.log(getMenu(filterRouter(router.getRoutes())), '结果');
 const menuList = reactive([
   {
     path: '/profile',

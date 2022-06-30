@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-menu
+      :default-active="$route.path"
       active-text-color="#ffd04b"
       background-color="#545c64"
       class="el-menu-vertical-demo"
-      default-active="2"
       router
       text-color="#fff"
     >
@@ -24,7 +24,6 @@ const props = defineProps({
     default: () => []
   }
 })
-console.log(props.data)
 </script>
 
 <style lang="scss" scoped>

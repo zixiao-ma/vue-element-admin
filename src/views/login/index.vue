@@ -60,6 +60,7 @@ import { validatorPwd } from '@/views/login/rules'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import SvgIcon from '@/components/SvgIcon'
+import { setTimeStamp } from '@/utils/auth'
 
 const toggleInputType = ref(false)
 const loginLoading = ref(false)
@@ -90,11 +91,11 @@ const submitForm = () => {
         loginLoading.value = true
         // 获取并storagetoken
         const newRuleForm = util.DeepCopy(ruleForm)
-        await store.dispatch('user/login', newRuleForm)
-        const res = await store.dispatch('user/getUserInfo')
+        const res = await store.dispatch('user/login', newRuleForm)
         if (res) {
-          await router.push({ name: 'HomeLayout' })
+          await setTimeStamp()
         }
+        await router.push({ name: 'HomeLayout' })
       } catch (error) {
       }
       loginLoading.value = false
