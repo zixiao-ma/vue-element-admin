@@ -37,7 +37,7 @@ function isNull (data) {
 export const getMenu = (routes) => {
   const result = []
   routes.forEach(item => {
-    // 如果meta是空的 children也是空的 直接停止
+    // 如果meta是空的 children也是空的 直接停止1
     if (isNull(item.meta) && isNull(item.children)) return
     // 如果meta有内容，并且children也不是空的
     if (isNull(item.meta) && !isNull(item.children)) {
