@@ -17,6 +17,5 @@ export const filterRouter = () => {
       return item.meta && JSON.stringify(item.meta) !== '{}'
     }))
   })
-  console.log(SubMenu)
   return SubMenu
 }

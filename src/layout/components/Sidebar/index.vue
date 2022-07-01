@@ -8,13 +8,15 @@
   </div>
 </template>
 <script setup>
-import { defineProps, reactive } from 'vue'
+import { defineProps } from 'vue'
 import DeepMenu from '@/layout/components/Sidebar/deepMenu';
 import LogoImage from '@/components/logoImage';
 import { useStore } from 'vuex';
-import { filterRouter } from '@/utils/FilterRouter';
+import { filterMenus, getMenus } from '@/utils/router'
+import { useRouter } from 'vue-router';
 
 const store = useStore()
+const router = useRouter()
 const { username } = store.getters.userInfo
 const props = defineProps({
   collapse: {
@@ -22,7 +24,8 @@ const props = defineProps({
     defaults: () => false
   }
 })
-const menus = reactive(filterRouter());
+
+const menus = getMenus(filterMenus(router.getRoutes()));
 </script>
 <style lang="scss">
 .navHeader {

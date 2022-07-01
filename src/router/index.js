@@ -47,7 +47,7 @@ const publicRoutes = [
     ]
   }
 ];
-const privateRoute = [
+const privateRoute = [/*
   {
     path: '/user',
     name: 'user',
@@ -131,7 +131,7 @@ const privateRoute = [
         component: () => import('../views/article-detail')
       }
     ]
-  }
+  } */
 ]
 const router = createRouter({
   history: createWebHashHistory(),
