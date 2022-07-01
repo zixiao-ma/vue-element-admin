@@ -1,46 +1,22 @@
-import router from '@/router';
-import store from '@/store/index'
-
-const menuRouter = []
-const menuRole = Object.values(store.getters.menuRole)
-const publicRole = []
-
-function MapArr (params) {
-  params.forEach(item => {
-    if (item.children && item.children.length > 0) {
-      if (item.path === '/') {
-        item.children.forEach(val => {
-          if (val.meta) {
-            publicRole.push(val)
-          }
-        })
-      }
-      item.children.forEach(val => {
-        if (val.meta) {
-          if (menuRole.includes(val.name)) {
-            menuRouter.push(val)
-          }
-        }
-      })
-    }
-  })
-}
+import router from '@/router/index';
 
 export const filterRouter = () => {
-  let rootRouter = []
-  const routerInfo = router.getRoutes()
-  console.log(routerInfo)
-  rootRouter = routerInfo.filter(value => {
-    return value.children.length > 0;
+  const SubMenu = router.getRoutes().filter(val => {
+    return val.children && val.children.length > 0 && JSON.stringify(val.meta) !== '{}'
   })
-  const allRouter = [...publicRole, ...menuRouter]
-  MapArr(rootRouter)
-  rootRouter.forEach((val) => {
-    allRouter.forEach(v => {
-      if (val.path.includes(v.path)) {
-        val.children.push(v)
-      }
+  const mainMenu = router.getRoutes().filter(val => {
+    return val.children && val.children.length > 0 && JSON.stringify(val.meta) === '{}'
+  })
+  SubMenu.forEach(val => {
+    val.children = val.children.filter(item => {
+      return item.meta && JSON.stringify(item.meta) !== '{}'
     })
   })
-  console.log(allRouter)
+  mainMenu.forEach(val => {
+    SubMenu.unshift(...val.children.filter(item => {
+      return item.meta && JSON.stringify(item.meta) !== '{}'
+    }))
+  })
+  console.log(SubMenu)
+  return SubMenu
 }

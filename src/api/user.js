@@ -50,10 +50,17 @@ const getUserDetail = (data) => {
     method: 'get'
   })
 }
+const getRoleList = () => {
+  return request({
+    url: '/role/list',
+    method: 'GET'
+  })
+}
 export default {
   login,
   getUserInfo,
   getUserFeature,
   getUserManage,
-  getUserDetail
+  getUserDetail,
+  getRoleList
 }

@@ -21,7 +21,7 @@ const publicRoutes = [
         name: 'profile',
         component: () => import('@/views/profile/index'),
         meta: {
-          title: 'profile',
+          title: '个人中心',
           icon: 'personnel'
         }
       },
@@ -31,7 +31,7 @@ const publicRoutes = [
         component: () => import('@/views/chart/index'),
         meta: {
           title: '数据可视化',
-          icon: 'chart'
+          icon: 'nested'
         }
       },
       {
@@ -52,6 +52,10 @@ const privateRoute = [
     path: '/user',
     name: 'user',
     component: HomeLayout,
+    meta: {
+      title: '用户',
+      icon: 'user'
+    },
     redirect: '/user/manage',
     children: [
       {
