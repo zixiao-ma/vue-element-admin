@@ -13,7 +13,7 @@
         <el-tag>{{ row.role[0].title }}</el-tag>
       </template>
       <template v-slot:time="{row}">
-        {{ row.openTime }}
+        {{ dayjs(row.openTime / 100 * 100).format("YYYY-MM-DD") }}
       </template>
       <template v-slot:footer="{row}">
         <el-button size="small"
@@ -43,6 +43,7 @@ import userApi from '@/api/user'
 import { reactive, ref } from 'vue';
 import MyTable from '@/components/MyTable';
 import Pagination from '@/components/pagination';
+import dayjs from 'dayjs'
 
 const pageModel = reactive({
   page: 1,
@@ -54,7 +55,7 @@ const getUserManage = async () => {
   try {
     console.log(pageModel)
     const res = await userApi.getUserManage(pageModel)
-    console.log(res.list)
+    console.log(res)
     tableList.value = res.list
     pageModel.total = res.total
   } catch (error) {

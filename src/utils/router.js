@@ -45,6 +45,5 @@ export const getMenus = (routes) => {
       route.children.push(...getMenus(item.children))
     }
   })
-  console.log(result)
   return result
 }

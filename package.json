@@ -6,7 +6,6 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-   
     "prepare": "husky install"
   },
   "dependencies": {
@@ -15,9 +14,11 @@
     "@element-plus/icons-vue": "^2.0.6",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
+    "dayjs": "^1.11.3",
     "element-plus": "^2.2.6",
     "md5": "^2.3.0",
     "nprogress": "^0.2.0",
+    "screenfull": "^6.0.2",
     "svg-sprite-loader": "6.0.9",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",

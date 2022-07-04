@@ -1,15 +1,18 @@
 <template>
+
   <el-menu
     active-text-color="#fff"
     background-color="#304156"
     class="el-menu-vertical-demo"
     default-active="1"
+    mb-2
     router
     text-color="#bfcbd9"
     unique-opened
   >
     <menu-item v-for="(item,index) in props.data" :key="index" :tree="item"></menu-item>
   </el-menu>
+
 </template>
 
 <script setup>

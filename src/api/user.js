@@ -56,11 +56,18 @@ const getRoleList = () => {
     method: 'GET'
   })
 }
+const getPermissionList = () => {
+  return request({
+    url: '/permission/list',
+    method: 'GET'
+  })
+}
 export default {
   login,
   getUserInfo,
   getUserFeature,
   getUserManage,
   getUserDetail,
-  getRoleList
+  getRoleList,
+  getPermissionList
 }

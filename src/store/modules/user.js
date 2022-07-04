@@ -1,12 +1,12 @@
 import user from '@/api/user';
 import { getItem, removeAllItem, setItem } from '@/utils/storage';
-import { TOKEN, USERINFO } from '@/constant';
+import { TOKEN } from '@/constant';
 
 export default {
   namespaced: true,
   state: () => ({
     token: getItem(TOKEN) || null,
-    userInfo: getItem(USERINFO) || ''
+    userInfo: {}
   }),
   mutations: {
     setToken (state, payload) {
@@ -15,19 +15,18 @@ export default {
     },
     setUserInfo (state, userInfo) {
       state.userInfo = userInfo;
-      setItem(USERINFO, userInfo)
     },
     loginOut (state) {
       state.token = null;
       state.userInfo = {}
       removeAllItem()
+      console.log('resr')
     }
   },
   actions: {
     async getUserInfo ({ commit }) {
       const res = await user.getUserInfo();
       commit('setUserInfo', res);
-      console.log(res);
       return res;
     },
     async login ({ commit }, payload) {

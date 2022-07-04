@@ -50,4 +50,7 @@ const collapse = (bool) => {
   right: 0;
   z-index: 9;
 }
+
+#guide-sidebar {
+}
 </style>

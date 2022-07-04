@@ -1,7 +1,8 @@
 <template>
-  <el-table :data="props.data" style="width: 100%">
+  <el-table :data="props.data" border row-key="id" style="width: 100%">
     <el-table-column
-      v-for="item in props.rules"
+      v-for="(item,index) in props.rules"
+      v-show="item.sort===index"
       :key="item.id"
       :align="item.align"
       :label="item.label"

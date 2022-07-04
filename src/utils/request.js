@@ -17,6 +17,7 @@ instance.interceptors.request.use(
     // TODO 添加token
     // loading.elLoading.start()
     loading.nprogress.start()
+    config.headers['Accept-Language'] = store.getters.language
     config.headers.Authorization = `Bearer ${store.getters.token}`
     const {
       icode,
