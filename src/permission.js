@@ -4,13 +4,14 @@ import store from '@/store';
 const whiteList = ['/login']
 
 router.beforeEach(async (to, from, next) => {
-  const tagObj = {
-    title: to.meta.title,
-    path: to.path
-  }
-  store.commit('tagView/addTag', tagObj)
+  console.log(to)
   if (to.meta.title) {
     document.title = to.meta.title
+    const tagObj = {
+      title: to.meta.title,
+      path: to.path
+    }
+    store.commit('tagView/addTag', tagObj)
   }
   if (store.getters.token) {
     if (to.path === '/login') {

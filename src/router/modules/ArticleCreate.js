@@ -15,7 +15,7 @@ export default {
       name: 'articleCreate',
       component: () => import('../../views/article-create'),
       meta: {
-        title: '发布文章',
+        title: '文章发布',
         icon: 'article-create'
       }
     }

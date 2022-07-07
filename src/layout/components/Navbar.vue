@@ -3,28 +3,23 @@
     <div class="navBar-top">
       <div class="left">
         <svg-icon :icon="iscollapse?'hamburger-opened':'hamburger-closed'" @click="collapse"></svg-icon>
-        <span>个人中心</span>
+        <bread-crumb></bread-crumb>
       </div>
       <div class="right">
+        <div class="subject" data-intro="这里可以设置主题"
+             @click="dialogVisible=true">
+          <svg-icon icon="change-theme"></svg-icon>
+        </div>
         <div class="search">
-          <el-select
-            v-model="keyword"
-            :loading="loading"
+          <el-autocomplete
+            v-model="state1"
+            :fetch-suggestions="querySearch"
             :prefix-icon="Search"
-            :remote-method="remoteMethod"
-            filterable
-            multiple
-            placeholder="Please enter a keyword"
-            remote
-            reserve-keyword
-          >
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
-          </el-select>
+            :trigger-on-focus="false"
+            class="inline-input w-50"
+            placeholder="快速跳转"
+            @select="handleSelect"
+          />
         </div>
         <div class="fullScreen" @click="screenfull.toggle();isFull=!isFull">
           <svg-icon :icon="isFull?'fullscreen':'exit-fullscreen'"></svg-icon>
@@ -49,24 +44,77 @@
       <tags-view></tags-view>
     </div>
   </header>
+  <el-dialog
+    v-model="dialogVisible"
+    title="选择主题"
+    width="30%"
+  >
+    <span>
+      选择主题色： <el-color-picker v-model="color"/>
+    </span>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="resetSubject">恢复默认</el-button>
+        <el-button type="primary" @click="changeSubject"
+        >确定</el-button
+        >
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup>
-import { defineEmits, ref } from 'vue'
+import { defineEmits, onMounted, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useRouter } from 'vue-router'
 import LogoImage from '@/components/logoImage';
 import { useStore } from 'vuex';
 import TagsView from '@/layout/components/tagsView';
 import screenfull from 'screenfull';
-import { Search } from '@element-plus/icons-vue'
 import SvgIcon from '@/components/SvgIcon';
+import BreadCrumb from '@/components/breadCrumb';
+import { filterMenus, getAutocomplete, getMenus } from '@/utils/Autocomplete';
+import { Search } from '@element-plus/icons-vue'
 
-const keyword = ref('')
+const color = ref()
+const dialogVisible = ref(false)
+const router = useRouter()
+const restaurants = ref([])
+const createFilter = (queryString) => {
+  return (restaurant) => {
+    return (
+      restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+    )
+  }
+}
+const state1 = ref('')
+const querySearch = (queryString, cb) => {
+  const results = queryString
+    ? restaurants.value.filter(createFilter(queryString))
+    : restaurants.value
+  // call callback function to return suggestions
+  cb(results)
+}
+const loadAll = () => {
+  return getMenus(filterMenus(getAutocomplete(router.getRoutes())))
+}
+const resetSubject = () => {
+  store.commit('subject/setColor', '#304156')
+}
+const handleSelect = (item) => {
+  router.push(item.link)
+}
+const changeSubject = () => {
+  store.commit('subject/setColor', color.value)
+  dialogVisible.value = false
+  ElMessage.success('设置成功')
+}
+onMounted(() => {
+  restaurants.value = loadAll()
+})
 const isFull = ref(true)
 const store = useStore()
 
-const router = useRouter()
 const emit = defineEmits(['collapse'])
 const iscollapse = ref(false)
 const collapse = () => {
@@ -116,13 +164,17 @@ function rest () {
 </script>
 <style lang="scss" scoped>
 header {
+  background-color: #fff;
+  width: 100%;
+  padding-right: 20px;
 
   .navBar-top {
-    padding: 5px 10px;
+    padding: 5px 50px 5px 10px;
     box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 99%;
 
     .right {
       display: flex;
@@ -130,7 +182,6 @@ header {
 
       .fullScreen {
         font-size: 25px;
-        color: rgb(191, 203, 217);
         margin-left: 10px;
       }
 
@@ -153,5 +204,10 @@ header {
     line-height: 32px;
     box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
   }
+}
+
+.subject {
+  margin-right: 10px;
+  font-size: 25px;
 }
 </style>

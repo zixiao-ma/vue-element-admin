@@ -5,5 +5,6 @@ export const getters = {
     return JSON.stringify(state.user.userInfo) === '{}'
   },
   tags: state => state.tagView.tags,
-  language: state => state.language
+  language: state => state.language,
+  color: state => state.subject.color
 }

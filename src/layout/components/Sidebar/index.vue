@@ -31,11 +31,11 @@ const menus = getMenus(filterMenus(router.getRoutes()));
 .navHeader {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 12px;
 
   span {
     color: #fff;
-    margin-left: 10px;
+    margin-left: 13px;
   }
 }
 </style>

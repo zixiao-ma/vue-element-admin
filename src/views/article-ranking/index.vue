@@ -19,7 +19,11 @@
         {{ dayjs(row.publicDate * 100 / 100).format("YYYY-MM-DD") }}
       </template>
       <template v-slot:footer="{row}">
-        <el-button size="small" type="primary" @click="$router.push(`/article/${row._id}`)">查看</el-button>
+        <el-button :style="{background:$store.getters.color,border:`1px solid ${$store.getters.color}`}" size="small"
+                   type="primary"
+                   @click="$router.push(`/article/${row._id}`)">
+          查看
+        </el-button>
         <el-button size="small" type="danger">删除</el-button>
       </template>
     </my-table>
@@ -117,4 +121,5 @@ function loadList () {
     margin-right: 10px;
   }
 }
+
 </style>

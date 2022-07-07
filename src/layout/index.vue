@@ -4,7 +4,7 @@
     <sidebar
       id="guide-sidebar"
       :collapse="menuCollapse"
-      :style="{ backgroundColor: variables.menuBg,width:menuCollapse?'64px':'210px'}"
+      :style="{ backgroundColor: $store.getters.color,width:menuCollapse?'64px':'210px'}"
 
       class="sidebar-container"
     />
@@ -24,7 +24,6 @@
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import AppMain from './components/AppMain'
-import variables from '@/styles/variables.module.scss'
 import { ref } from 'vue'
 
 const menuCollapse = ref(false)
@@ -35,7 +34,11 @@ const collapse = (bool) => {
 </script>
 <style lang="scss" scoped>
 @import '~@/styles/mixin.scss';
-@import '~@/styles/variables.module.scss';
+
+.main-container {
+  overflow: hidden;
+
+}
 
 .app-wrapper {
   @include clearfix;
@@ -49,8 +52,7 @@ const collapse = (bool) => {
   top: 0;
   right: 0;
   z-index: 9;
+  width: 86%;
 }
 
-#guide-sidebar {
-}
 </style>

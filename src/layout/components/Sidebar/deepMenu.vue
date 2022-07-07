@@ -1,8 +1,9 @@
 <template>
 
   <el-menu
+    :background-color="$store.getters.color"
+    :collapse="collapse"
     active-text-color="#fff"
-    background-color="#304156"
     class="el-menu-vertical-demo"
     default-active="1"
     mb-2

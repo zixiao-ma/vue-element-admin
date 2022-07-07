@@ -1,7 +1,9 @@
 <template>
   <my-table :data="roleList" :rules="tableRules">
     <template #footer>
-      <el-button size="small" type="primary">分配权限</el-button>
+      <el-button :style="{background:$store.getters.color,border:`1px solid ${$store.getters.color}`}" size="small"
+                 type="primary">分配权限
+      </el-button>
     </template>
   </my-table>
 </template>

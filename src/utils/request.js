@@ -46,7 +46,6 @@ instance.interceptors.response.use(
       }
 
     } = response
-    console.log(response)
     if (code === 200) {
       showMessage && ElMessage.success(message)
       return data

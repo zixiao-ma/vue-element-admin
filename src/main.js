@@ -11,6 +11,7 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 const app = createApp(App);
 installIcons(app);
+
 app.use(ElementPlus, {
   locale: zhCn
 }).use(store).use(router).mount('#app');

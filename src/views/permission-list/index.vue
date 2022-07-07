@@ -1,7 +1,6 @@
 <template>
-  <my-table :data="roleList" :rules="tableRules">
+  <my-table :data="roleList" :rules="tableRules"></my-table>
 
-  </my-table>
 </template>
 <script setup>
 import userApi from '@/api/user'

@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import util from '@/utils/util';
 import { validatorPwd } from '@/views/login/rules'
 import { useStore } from 'vuex'
@@ -68,6 +68,13 @@ const router = useRouter()
 const ruleForm = reactive({
   username: 'admin',
   password: '123456'
+})
+onMounted(() => {
+  document.addEventListener('keydown', function (e) {
+    if (e.keyCode === 13) {
+      submitForm()
+    }
+  })
 })
 const rules = reactive({
   username: [{

@@ -1,6 +1,8 @@
 <template>
   <el-card class="Excel_model">
-    <el-button type="primary">Excel导入</el-button>
+    <el-button :style="{background:$store.getters.color,border:`1px solid ${$store.getters.color}`}" type="primary">
+      Excel导入
+    </el-button>
     <el-button type="success">Excel导出</el-button>
   </el-card>
   <el-card class="table_model">
@@ -16,7 +18,8 @@
         {{ dayjs(row.openTime / 100 * 100).format("YYYY-MM-DD") }}
       </template>
       <template v-slot:footer="{row}">
-        <el-button size="small"
+        <el-button :style="{background:$store.getters.color,border:`1px solid ${$store.getters.color}`}"
+                   size="small"
                    type="primary"
                    @click="$router.push(`/user/info/${row._id}`)"
         >查看

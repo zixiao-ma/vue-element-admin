@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import HomeLayout from '@/layout/index'
-import UserManage from '@/router/modules/UserManage';
-import RoleList from '@/router/modules/RoleList';
-import PermissionList from '@/router/modules/PermissionList';
+import UserManage from '@/router/modules/userManage';
+import RoleList from '@/router/modules/roleList';
+import PermissionList from '@/router/modules/permissionList';
 import Article from '@/router/modules/Article';
 import ArticleCreate from '@/router/modules/ArticleCreate';
 
