@@ -26,5 +26,10 @@ yarn lint
 
 ### Customize configuration
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
-//深拷贝密码，vuex模块化
+### 登陆页面：
+
+![](./img/login.png)
+
+### 首页演示：
+
+![](./img/index.png)
